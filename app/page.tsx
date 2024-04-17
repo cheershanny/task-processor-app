@@ -1,4 +1,5 @@
 import AddTaskForm from "./components/AddTaskForm";
+import TaskList from "./components/TaskList";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
         <strong className="font-bold underline">step</strong>
       </h1>
       <AddTaskForm />
+      <TaskList />
     </main>
   );
 }
