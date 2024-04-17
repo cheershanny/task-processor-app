@@ -1,13 +1,20 @@
 "use client";
-import Link from "next/link";
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
+
 
 const AddTaskForm = () => {
   const [newTask, setNewTask] = useState<string>("");
-  const [taskList, setTaskList] = useState<string[]>([]);
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setTaskList((prevTaskList) => [...prevTaskList, newTask]);
+    const response = await fetch("/api/tasks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ task: newTask }),
+    });
     setNewTask("");
   };
   return (
@@ -24,20 +31,7 @@ const AddTaskForm = () => {
         />
         <button className="btn btn-outline btn-sm ml-2">Add</button>
       </form>
-      <ul className="ml-10 mt-5">
-        <h2>Your task folder</h2>
-        {taskList.map((task, index) => (
-          <li key={index}>
-            {index + 1}.{" "}
-            <Link
-              href={`/${task}`}
-              className="underline decoration-primary hover:bg-base-200"
-            >
-              {task}
-            </Link>
-          </li>
-        ))}
-      </ul>
+     
     </div>
   );
 };
