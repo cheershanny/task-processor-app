@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import NavBar from "./NavBar";
+import AuthProvider from "./auth/Provider";
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-poppins',
-  weight: ['100', '200', '300', '400', '500']
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-poppins",
+  weight: ["100", "200", "300", "400", "500"],
 });
-
 
 export const metadata: Metadata = {
   title: "Break task down",
@@ -23,7 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme="lemonade">
-      <body className={poppins.className}>{children}</body>
+      <body className={poppins.className}>
+        <AuthProvider>
+          {/* <NavBar /> */}
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   );
 }
