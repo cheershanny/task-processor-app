@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-poppins',
+  weight: ['100', '200', '300', '400', '500']
+});
+
 
 export const metadata: Metadata = {
-  title: "App name",
-  description: "The solution this app offer and for whom if it's application",
+  title: "Break task down",
+  description:
+    "Help you setting up your task guideline and move on each step until finish",
 };
 
 export default function RootLayout({
@@ -15,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme='lemonade'>
-      <body className={inter.className}>{children}</body>
+    <html lang="en" data-theme="lemonade">
+      <body className={poppins.className}>{children}</body>
     </html>
   );
 }
