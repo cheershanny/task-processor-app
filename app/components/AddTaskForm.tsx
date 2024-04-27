@@ -25,17 +25,20 @@ const AddTaskForm = ({ addTask }: Props) => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col sm:flex-row items-center justify-center sm:justify-start"
+      >
         <input
           type="text"
           aria-label="Add your new repetitive task"
           placeholder="example: Build new web app"
-          className="input input-bordered w-full max-w-xs ml-10"
+          className="input input-bordered w-full max-w-xs sm:mb-0 md:ml-10 mb-4"
           value={taskInput}
           required
           onChange={(e) => setTaskInput(e.target.value)}
         />
-        <button className="btn btn-outline btn-sm ml-2">Add</button>
+        <button className="btn btn-outline ml-2">Add</button>
       </form>
     </div>
   );
