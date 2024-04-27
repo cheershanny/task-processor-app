@@ -1,22 +1,11 @@
-"use client";
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { Task } from "../types/Task";
 
-interface Task {
-  id: number;
-  name: string;
+interface Props {
+  tasks: Task[];
 }
 
-const TaskList = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  useEffect(() => {
-    fetch("/api/tasks")
-      .then((res) => res.json())
-      .then((data) => {
-        setTasks(data);
-      });
-  }, []);
-
+const TaskList = ({ tasks }: Props) => {
   return (
     <div className="ml-10 mt-5">
       <h2>Your task folder</h2>

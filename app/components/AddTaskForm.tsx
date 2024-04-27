@@ -1,10 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { Task } from "../types/Task";
 
+interface Props {
+  addTask: (newTask: Task) => void;
+}
 
-const AddTaskForm = () => {
-  const [newTask, setNewTask] = useState<string>("");
+const AddTaskForm = ({ addTask }: Props) => {
+  const [taskInput, setTaskInput] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -13,9 +17,11 @@ const AddTaskForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ task: newTask }),
+      body: JSON.stringify({ name: taskInput }),
     });
-    setNewTask("");
+    const newTask = await response.json();
+    addTask(newTask);
+    setTaskInput("");
   };
   return (
     <div>
@@ -25,13 +31,12 @@ const AddTaskForm = () => {
           aria-label="Add your new repetitive task"
           placeholder="example: Build new web app"
           className="input input-bordered w-full max-w-xs ml-10"
-          value={newTask}
+          value={taskInput}
           required
-          onChange={(e) => setNewTask(e.target.value)}
+          onChange={(e) => setTaskInput(e.target.value)}
         />
         <button className="btn btn-outline btn-sm ml-2">Add</button>
       </form>
-     
     </div>
   );
 };
