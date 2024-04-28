@@ -21,13 +21,13 @@ const TaskList = ({ tasks, removeTask, editTask }: Props) => {
         {tasks.map((task) => (
           <li key={task.id} className="flex items-center space-x-2">
             <Link
-              href={`${task.name}`}
+              href={`/tasks/${task.name}?id=${task.id}`}
               className="underline hover:bg-slate-400 mr-3"
             >
               {task.name}
             </Link>
-              <EditTaskButton taskId={task.id} editTask={editTask}/>
-              <RemoveTaskButton taskId={task.id} removeTask={removeTask}/>
+            <EditTaskButton taskId={task.id} editTask={editTask} />
+            <RemoveTaskButton taskId={task.id} removeTask={removeTask} />
           </li>
         ))}
       </ul>
@@ -35,4 +35,4 @@ const TaskList = ({ tasks, removeTask, editTask }: Props) => {
   );
 };
 
-export default TaskList;  
+export default TaskList;

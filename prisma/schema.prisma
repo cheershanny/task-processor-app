@@ -14,16 +14,16 @@ datasource db {
 }
 
 model Task {
-  id     Int     @id @default(autoincrement())
-  name   String
-  steps  Step[]
+  id    Int    @id @default(autoincrement())
+  name  String
+  steps Step[]
 }
 
 model Step {
   id          Int     @id @default(autoincrement())
   name        String
+  duration    Int
   description String?
-  link        String?
-  Task        Task?   @relation(fields: [taskId], references: [id])
-  taskId      Int?
+  Task        Task    @relation(fields: [taskId], references: [id])
+  taskId      Int
 }
