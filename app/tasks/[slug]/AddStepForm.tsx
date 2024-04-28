@@ -11,18 +11,19 @@ interface Props {
 }
 
 const AddStep = ({ taskId }: Props) => {
-  const { register, handleSubmit, control } = useForm<Step>();
-
+  const { register, handleSubmit, control, reset } = useForm<Step>();
   const [errorMessage, setErrorMessage] = useState<string>("");
+
   const onSubmit = async (formData: Step) => {
-    console.log(formData);
-    await fetch("/api/steps", {
+    const response = await fetch("/api/steps", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     });
+    if (!response.ok) setErrorMessage("Failed to add step");
+    reset();
   };
 
   return (
@@ -37,14 +38,17 @@ const AddStep = ({ taskId }: Props) => {
         <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
           <input
             type="hidden"
+            aria-label="task ID"
             value={taskId}
             {...register("taskId", { valueAsNumber: true })}
           />
           <div className="grid grid-cols-4 gap-3 mb-3">
             <input
               type="text"
+              aria-label="Add step"
               placeholder="Add step"
               className="input input-bordered col-span-3"
+              required
               {...register("name")}
             />
             <input
