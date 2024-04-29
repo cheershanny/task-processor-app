@@ -25,10 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="lemonade">
       <body className={poppins.className}>
-        <AuthProvider>
-          {/* <NavBar /> */}
-          {children}
-        </AuthProvider>
+        {/* <AuthProvider> */}
+        {/* <NavBar /> */}
+        <main className="px-5">{children}</main>
+
+        {/* </AuthProvider> */}
       </body>
     </html>
   );

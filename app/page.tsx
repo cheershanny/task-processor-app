@@ -27,13 +27,13 @@ export default function Home() {
     );
   }
   return (
-    <main>
+    <div>
       <h1 className="m-5 text-4xl">
         Break task down & Stay on{" "}
         <strong className="font-bold underline">step</strong>
       </h1>
       <AddTaskForm addTask={addTask} />
       <TaskList tasks={tasks} removeTask={removeTask} editTask={editTask} />
-    </main>
+    </div>
   );
 }
