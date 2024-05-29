@@ -8,11 +8,13 @@ import { Step } from "../../types/Step";
 
 interface Props {
   taskId: string;
+  addStep: (newStep: Step) => void;
 }
 
-const AddStep = ({ taskId }: Props) => {
+const AddStep = ({ taskId, addStep }: Props) => {
   const { register, handleSubmit, control, reset } = useForm<Step>();
   const [errorMessage, setErrorMessage] = useState<string>("");
+  
 
   const onSubmit = async (formData: Step) => {
     const response = await fetch("/api/steps", {
@@ -23,6 +25,8 @@ const AddStep = ({ taskId }: Props) => {
       body: JSON.stringify(formData),
     });
     if (!response.ok) setErrorMessage("Failed to add step");
+    const newStep = await response.json();
+    addStep(newStep);
     reset();
   };
 
