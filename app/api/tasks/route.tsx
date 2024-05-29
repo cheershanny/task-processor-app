@@ -18,11 +18,6 @@ export async function POST(request: NextRequest) {
   return NextResponse.json(newTask, { status: 201 });
 }
 
-export async function DELETE(request: NextRequest) {
-  const body = await request.json();
-  await prisma.task.delete({ where: { id: body.id } });
-  return NextResponse.json({ message: "success!" }, { status: 200 });
-}
 
 export async function PUT(request: NextRequest) {
   const body = await request.json();

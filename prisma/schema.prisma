@@ -24,6 +24,6 @@ model Step {
   name        String
   duration    Int
   description String?
-  Task        Task    @relation(fields: [taskId], references: [id])
+  Task        Task    @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId      Int
 }

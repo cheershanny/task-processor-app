@@ -8,12 +8,11 @@ type Props = {
 
 const RemoveTaskButton = ({ taskId, removeTask }: Props) => {
   const handleClick = async () => {
-    const response = await fetch("/api/tasks", {
+    const response = await fetch(`/api/tasks/${taskId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: taskId }),
     });
     if (response.ok) {
       removeTask(taskId);
